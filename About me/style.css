@@ -1,0 +1,395 @@
+/* ==========================================================================
+   Estilos Base & Variáveis
+   ========================================================================== */
+/* Define variáveis globais para cores e fontes, facilitando alterações futuras */
+:root {
+    --bg-color: #050505; /* Cor de fundo quase preta */
+    --text-color: #e0e0e0; /* Cor do texto cinza claro */
+    --primary-color: #00f3ff; /* Azul Ciano Neon (Cor primária) */
+    --secondary-color: #bc13fe; /* Roxo Neon (Cor secundária) */
+    --glass-bg: rgba(20, 20, 20, 0.6); /* Fundo vidro semi-transparente escuro */
+    --glass-border: rgba(0, 243, 255, 0.2); /* Borda do vidro com brilho ciano */
+    --font-heading: 'Orbitron', sans-serif; /* Fonte futurista para títulos */
+    --font-body: 'Rajdhani', sans-serif; /* Fonte técnica para texto */
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação suave */
+}
+
+/* Reseta margens e preenchimentos de todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding não aumente o tamanho total do elemento */
+}
+
+/* Estilos do corpo da página */
+body {
+    background-color: var(--bg-color); /* Aplica a cor de fundo */
+    color: var(--text-color); /* Aplica a cor do texto */
+    font-family: var(--font-body); /* Aplica a fonte padrão */
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    line-height: 1.6; /* Espaçamento entre as linhas */
+    min-height: 100vh; /* Garante que o corpo ocupe pelo menos 100% da altura da tela */
+    display: flex; /* Cria um layout flexível */
+    flex-direction: column; /* Organiza itens em coluna */
+}
+
+/* ==========================================================================
+   Background Canvas (Fundo Animado)
+   ========================================================================== */
+canvas#bg-canvas {
+    position: fixed; /* Fixa o canvas na tela, não rola com a página */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    z-index: -1; /* Coloca atrás de todo o conteúdo */
+    pointer-events: none; /* Permite clicar através dele */
+}
+
+/* ==========================================================================
+   Tipografia & Utilitários
+   ========================================================================== */
+/* Estilos para títulos H1, H2, H3 */
+h1, h2, h3 {
+    font-family: var(--font-heading); /* Fonte futurista */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    letter-spacing: 2px; /* Espaçamento entre letras */
+}
+
+/* Efeito Glitch (Falha Digital) */
+.glitch {
+    position: relative;
+    color: var(--text-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Cria duplicações do texto para o efeito de falha */
+.glitch::before,
+.glitch::after {
+    content: attr(data-text); /* Copia o texto do atributo data-text */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+/* Camada da falha rosa */
+.glitch::before {
+    left: 2px; /* Desloca levemente */
+    text-shadow: -1px 0 #ff00c1; /* Sombra rosa */
+    clip: rect(44px, 450px, 56px, 0); /* Recorte inicial */
+    animation: glitch-anim 5s infinite linear alternate-reverse; /* Animação */
+}
+
+/* Camada da falha ciano */
+.glitch::after {
+    left: -2px; /* Desloca levemente */
+    text-shadow: -1px 0 #00fff9; /* Sombra ciano */
+    clip: rect(44px, 450px, 56px, 0); /* Recorte inicial */
+    animation: glitch-anim2 5s infinite linear alternate-reverse; /* Animação */
+}
+
+/* Animação do Glitch (cortes aleatórios) */
+@keyframes glitch-anim {
+    0% { clip: rect(38px, 9999px, 86px, 0); }
+    20% { clip: rect(3px, 9999px, 47px, 0); }
+    40% { clip: rect(66px, 9999px, 12px, 0); }
+    60% { clip: rect(79px, 9999px, 49px, 0); }
+    80% { clip: rect(10px, 9999px, 83px, 0); }
+    100% { clip: rect(54px, 9999px, 95px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(9px, 9999px, 73px, 0); }
+    20% { clip: rect(56px, 9999px, 2px, 0); }
+    40% { clip: rect(13px, 9999px, 98px, 0); }
+    60% { clip: rect(32px, 9999px, 4px, 0); }
+    80% { clip: rect(85px, 9999px, 62px, 0); }
+    100% { clip: rect(21px, 9999px, 3px, 0); }
+}
+
+/* ==========================================================================
+   Home Page (Página Inicial)
+   ========================================================================== */
+.home-container {
+    height: 100vh; /* Altura da tela inteira */
+    display: flex; /* Layout flex */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    flex-direction: column; /* Itens um embaixo do outro */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Texto 'System Ready...' */
+.welcome-text {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    opacity: 0; /* Começa invisível */
+    animation: fadeInUp 1s ease forwards 0.5s; /* Aparece subindo */
+}
+
+/* Título Principal */
+.main-title {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 10px var(--secondary-color); /* Brilho roxo */
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 0.8s;
+}
+
+/* Botão 'Me Conheça' */
+.btn-enter {
+    padding: 1.2rem 3rem; /* Tamanho do botão */
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    color: var(--bg-color); /* Texto preto */
+    background: var(--primary-color); /* Fundo ciano */
+    border: none;
+    border-radius: 50px; /* Bordas arredondadas */
+    cursor: pointer;
+    text-decoration: none; /* Remove sublinhado */
+    box-shadow: 0 0 20px var(--primary-color); /* Brilho do botão */
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition); /* Animação suave ao passar o mouse */
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 1.2s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* Efeito Hover do Botão */
+.btn-enter:hover {
+    transform: scale(1.1); /* Aumenta um pouco */
+    box-shadow: 0 0 40px var(--primary-color), 0 0 80px var(--secondary-color); /* Aumenta brilho */
+    background: #fff; /* Fica branco */
+}
+
+/* ==========================================================================
+   About Page (Perfil)
+   ========================================================================== */
+.about-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Cartão do Perfil */
+.profile-card {
+    display: flex; /* Layout lado a lado */
+    background: var(--glass-bg); /* Vidro fumê */
+    backdrop-filter: blur(15px); /* Desfoque atrás do vidro */
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden; /* Garante que nada saia das bordas arredondadas */
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Sombra forte */
+    animation: slideIn 1s ease forwards; /* Animação de entrada lateral */
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+}
+
+/* Imagem do Perfil */
+.profile-image {
+    flex: 1 1 300px; /* Tamanho flexível */
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Imagem dentro da div */
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cobre todo o espaço sem distorcer */
+    object-position: center 20%; /* Foca na parte superior central (rosto) */
+    transition: transform 0.5s ease;
+    
+    /* Melhoria de Qualidade */
+    filter: contrast(1.1) brightness(1.1) saturate(1.2);
+    
+    /* Borda RGB Animada */
+    border: 4px solid transparent; /* Espaço para o gradiente */
+    border-radius: 12px; /* Cantos arredondados */
+    background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) border-box;
+    background-size: 200% 200%; /* Tamanho do gradiente para animar */
+    animation: rgbBorder 3s linear infinite; /* Animação contínua */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra externa */
+}
+
+/* Animação do RGB Border */
+@keyframes rgbBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Zoom na imagem ao passar o mouse */
+.profile-image:hover img {
+    transform: scale(1.1);
+}
+
+/* Efeito de degradê sobre a imagem */
+.profile-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent 0%, var(--bg-color) 150%);
+    opacity: 0.3;
+}
+
+/* Informações do Perfil */
+.profile-info {
+    flex: 1 1 400px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-name {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.profile-role {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    font-family: 'Courier New', monospace;
+}
+
+.profile-bio {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+/* Destaque para graduação (Borda lateral) */
+.degree-highlight {
+    background: rgba(0, 243, 255, 0.1); /* Fundo ciano bem claro */
+    border-left: 3px solid var(--primary-color); /* Linha lateral ciano */
+    padding: 1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+/* Botão de Voltar */
+.btn-back {
+    align-self: flex-start;
+    padding: 0.8rem 2rem;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.btn-back:hover {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* ==========================================================================
+   Animações Keyframes
+   ========================================================================== */
+/* Animação para aparecer subindo */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animação para aparecer deslizando da esquerda */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem; /* Diminui o título */
+    }
+    
+    .profile-card {
+        flex-direction: column; /* Empilha foto e texto */
+    }
+    
+    .profile-image {
+        min-height: 250px; /* Diminui altura da foto */
+    }
+    
+    .profile-info {
+        padding: 2rem;
+    }
+}
+
+/* ==========================================================================
+   Redes Sociais e Footer
+   ========================================================================== */
+.social-links {
+    margin: 1.5rem 0; /* Espaço acima e abaixo */
+    display: flex; /* Ícones lado a lado */
+    justify-content: flex-end; /* Alinha os ícones à direita */
+    gap: 1.5rem; /* Espaço entre ícones */
+}
+
+.social-links a {
+    font-size: 2rem; /* Tamanho do ícone */
+    color: var(--text-color); /* Cor branca/cinza */
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    color: var(--primary-color); /* Fica Ciano ao passar o mouse */
+    text-shadow: 0 0 10px var(--primary-color); /* Brilho neon */
+    transform: translateY(-3px); /* Sobe um pouquinho */
+}
+
+/* Footer de Copyright */
+.copyright {
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.5); /* Texto mais apagado */
+    font-size: 0.9rem;
+    position: absolute; /* Fixa no final do container */
+    bottom: 1rem;
+    left: 0;
+}
+
+/* Ajuste no container para caber o footer */
+.about-container {
+    position: relative; /* Necessário para o footer absolute funcionar */
+    padding-bottom: 4rem; /* Espaço extra embaixo para o footer não sobrepor */
+}

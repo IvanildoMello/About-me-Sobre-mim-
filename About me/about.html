@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Configura a visualização para dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define o título da página -->
+    <title>Ivanildo Melo | Dev</title>
+    <!-- Links para as fontes do Google (mesmas da página inicial) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link para FontAwesome (Ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link para o arquivo CSS. O './' significa 'mesma pasta' -->
+    <link rel="stylesheet" href="style.css">
+<!-- Fim do cabeçalho -->
+</head>
+<body>
+
+    <!-- Canvas para o fundo animado (reutilizado) -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Container da seção Sobre -->
+    <div class="about-container">
+        <!-- Cartão principal com efeito de vidro -->
+        <div class="profile-card">
+            <!-- Área da foto de perfil -->
+            <div class="profile-image">
+                <!-- Imagem do usuário. O arquivo deve estar na pasta 'img' ou o caminho ajustado -->
+                <img src="img/63 017.jpg" alt="Ivanildo Melo - " id="profile-img">
+            </div>
+            
+            <!-- Área de informações do perfil -->
+            <div class="profile-info">
+                <!-- Nome em destaque -->
+                <h2 class="profile-name">IVANILDO MELO</h2>
+                <!-- Cargo e Especialização -->
+                <h3 class="profile-role">Developer & Cybersecurity</h3>
+                
+                <!-- Destaque para a graduação -->
+                <p class="degree-highlight">
+                    🎓 Graduado em Análise e Desenvolvimento de Sistemas (ADS)
+                </p>
+
+                <!-- Biografia / Texto sobre -->
+                <div class="profile-bio">
+                    <p>
+                        Olá! Sou um entusiasta da tecnologia com foco em criar soluções digitais seguras e inovadoras. 
+                        Minha jornada na faculdade de ADS me proporcionou uma base sólida em lógica e arquitetura de software.
+                    </p>
+                    <br>
+                    <p>
+                        Atualmente, exploro o mundo da Cibersegurança e Desenvolvimento Web, buscando sempre a próxima fronteira digital.
+                    </p>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="social-links">
+                    <a href="https://github.com/SEU_USER" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/SEU_USER" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+
+                <!-- Botão de voltar. O 'index.html' está na mesma pasta raiz agora -->
+                <a href="index.html" class="btn-back">
+                    &lt; Voltar ao Início
+                </a>
+            </div>
+        </div>
+        
+        <!-- Copyright Footer -->
+        <footer class="copyright">
+            <p>&copy; 2026 Ivanildo Melo. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Script JavaScript. O '../' busca o arquivo na pasta raiz -->
+    <script src="../scrypt.js"></script>
+<!-- Fim do corpo -->
+</body>
+<!-- Fim do HTML -->
+</html>

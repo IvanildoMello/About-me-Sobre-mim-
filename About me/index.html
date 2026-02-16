@@ -1,0 +1,47 @@
+<!-- Define o tipo de documento como HTML5 -->
+<!DOCTYPE html>
+<!-- Inicia o documento HTML e define o idioma como português do Brasil -->
+<html lang="pt-br">
+<!-- Início do cabeçalho do documento (metadados e links) -->
+<head>
+    <!-- Define a codificação de caracteres como UTF-8 (suporta acentos) -->
+    <meta charset="UTF-8">
+    <!-- Configura a visualização para dispositivos móveis (responsividade) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define o título da página que aparece na aba do navegador -->
+    <title>Ivanildo Melo | System Entry</title>
+    <!-- Conecta com o servidor de fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Conecta com o servidor de arquivos estáticos de fontes do Google -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Importa as fontes Orbitron e Rajdhani do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link para o arquivo CSS de estilos (está na mesma pasta) -->
+    <link rel="stylesheet" href="style.css">
+<!-- Fim do cabeçalho -->
+</head>
+<!-- Início do corpo do documento (conteúdo visível) -->
+<body>
+
+    <!-- Canvas para o efeito de fundo animado (partículas/matrix) -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Container principal da página inicial -->
+    <div class="home-container">
+        <!-- Texto de boas-vindas com animação -->
+        <p class="welcome-text">System Ready...</p>
+        <!-- Título principal com efeito de glitch (falha digital) -->
+        <h1 class="main-title glitch" data-text="IVANILDO MELO">IVANILDO MELO</h1>
+        
+        <!-- Botão para entrar no site, redireciona para a pasta 'paginas' e arquivo 'about.html' -->
+        <a href="about.html" class="btn-enter" id="enter-btn">
+            Me Conheça
+        </a>
+    </div>
+
+    <!-- Importa o arquivo JavaScript para animações (está na mesma pasta) -->
+    <script src="scrypt.js"></script>
+<!-- Fim do corpo do documento -->
+</body>
+<!-- Fim do documento HTML -->
+</html>
